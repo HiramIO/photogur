@@ -13,12 +13,18 @@ class PicturesController < ApplicationController
   end
 
   def create
-    @picture = Picture.new
+    @picture = Picture.create(picture_params)
     if @picture.save
       redirect_to "/pictures"
     else
       render :new
     end
+  end
+
+  private
+
+  def picture_params
+    params.require(:picture).permit(:artist, :title, :url)
   end
 
 end
